@@ -4,119 +4,116 @@ using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
 
-namespace mikeee324.Utils
+[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
+public class Utils : UdonSharpBehaviour
 {
-    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-    public class Utils : UdonSharpBehaviour
+
+    public static void Log(string tag, string message, string tagColor = "green")
     {
+        Debug.Log($"[<color={tagColor}>{tag}</color>] {message}");
+    }
 
-        public static void Log(string tag, string message, string tagColor = "green")
+    public static void LogWarning(string tag, string message, string tagColor = "green")
+    {
+        Debug.LogWarning($"[<color={tagColor}>{tag}</color>] {message}");
+    }
+
+    public static void LogError(string tag, string message, string tagColor = "green")
+    {
+        Debug.LogError($"[<color={tagColor}>{tag}</color>] {message}");
+    }
+
+    public static void Log(UdonSharpBehaviour context, string message, string tagColor = "green")
+    {
+        if (context == null)
         {
-            Debug.Log($"[<color={tagColor}>{tag}</color>] {message}");
+            Debug.LogError("Log context is missing!");
+            return;
         }
 
-        public static void LogWarning(string tag, string message, string tagColor = "green")
+        Debug.Log($"[{context.gameObject.name} (<color={tagColor}>{context.GetUdonTypeName()}</color>)] {message}");
+    }
+
+    public static void LogWarning(UdonSharpBehaviour context, string message, string tagColor = "green")
+    {
+        if (context == null)
         {
-            Debug.LogWarning($"[<color={tagColor}>{tag}</color>] {message}");
+            Debug.LogError("Log context is missing!");
+            return;
         }
 
-        public static void LogError(string tag, string message, string tagColor = "green")
+        Debug.LogWarning($"[{context.gameObject.name} (<color={tagColor}>{context.GetUdonTypeName()}</color>)] {message}");
+    }
+    public static void LogError(UdonSharpBehaviour context, string message, string tagColor = "green")
+    {
+        if (context == null)
         {
-            Debug.LogError($"[<color={tagColor}>{tag}</color>] {message}");
+            Debug.LogError("Log context is missing!");
+            return;
         }
 
-        public static void Log(UdonSharpBehaviour context, string message, string tagColor = "green")
+        Debug.LogError($"[{context.gameObject.name} (<color={tagColor}>{context.GetUdonTypeName()}</color>)] {message}");
+    }
+
+    /// <summary>
+    /// Checks if the player isn't already the owner of the object, if not it applies ownership of the object
+    /// </summary>
+    /// <param name="player">The player who wants ownership</param>
+    /// <param name="nowOwns">The object to set ownership on</param>
+    public static void SetOwner(VRCPlayerApi player, GameObject nowOwns)
+    {
+        if (!Networking.IsOwner(player, nowOwns))
+            Networking.SetOwner(player, nowOwns);
+    }
+
+    /// <summary>
+    /// This will check if there are any players in the selected objects box collider.
+    /// </summary>
+    /// <param name="objectWithBoxCollider">This is the gameObject that you wanna check. It needs a box collider.</param>
+    /// <returns>true if a person is in it. False if there is no box collider or no person in it.</returns>
+    public static bool PlayerPresentInBoxCollider(GameObject objectWithBoxCollider)
+    {
+        if (objectWithBoxCollider == null)
         {
-            if (context == null)
-            {
-                Debug.LogError("Log context is missing!");
-                return;
-            }
-
-            Debug.Log($"[{context.gameObject.name} (<color={tagColor}>{context.GetUdonTypeName()}</color>)] {message}");
-        }
-
-        public static void LogWarning(UdonSharpBehaviour context, string message, string tagColor = "green")
-        {
-            if (context == null)
-            {
-                Debug.LogError("Log context is missing!");
-                return;
-            }
-
-            Debug.LogWarning($"[{context.gameObject.name} (<color={tagColor}>{context.GetUdonTypeName()}</color>)] {message}");
-        }
-        public static void LogError(UdonSharpBehaviour context, string message, string tagColor = "green")
-        {
-            if (context == null)
-            {
-                Debug.LogError("Log context is missing!");
-                return;
-            }
-
-            Debug.LogError($"[{context.gameObject.name} (<color={tagColor}>{context.GetUdonTypeName()}</color>)] {message}");
-        }
-
-        /// <summary>
-        /// Checks if the player isn't already the owner of the object, if not it applies ownership of the object
-        /// </summary>
-        /// <param name="player">The player who wants ownership</param>
-        /// <param name="nowOwns">The object to set ownership on</param>
-        public static void SetOwner(VRCPlayerApi player, GameObject nowOwns)
-        {
-            if (!Networking.IsOwner(player, nowOwns))
-                Networking.SetOwner(player, nowOwns);
-        }
-
-        /// <summary>
-        /// This will check if there are any players in the selected objects box collider.
-        /// </summary>
-        /// <param name="objectWithBoxCollider">This is the gameObject that you wanna check. It needs a box collider.</param>
-        /// <returns>true if a person is in it. False if there is no box collider or no person in it.</returns>
-        public static bool PlayerPresentInBoxCollider(GameObject objectWithBoxCollider)
-        {
-            if (objectWithBoxCollider == null)
-            {
-                LogError(tag: "Utils", message: nameof(PlayerPresentInBoxCollider) + " tried to run but had no box collider.", tagColor: "red");
-                return false;
-            }
-            VRCPlayerApi[] vrcPlayers = new VRCPlayerApi[100]; //This is to check if players are present.
-            VRCPlayerApi.GetPlayers(vrcPlayers);
-            foreach (VRCPlayerApi player in vrcPlayers)
-            {
-                if (player == null) continue;
-                if (objectWithBoxCollider.GetComponent<BoxCollider>().bounds.Contains(player.GetPosition()))
-                {
-                    return true;
-                }
-            }
+            LogError(tag: "Utils", message: nameof(PlayerPresentInBoxCollider) + " tried to run but had no box collider.", tagColor: "red");
             return false;
         }
-
-        public static float GetUnixTimestamp()
+        VRCPlayerApi[] vrcPlayers = new VRCPlayerApi[100]; //This is to check if players are present.
+        VRCPlayerApi.GetPlayers(vrcPlayers);
+        foreach (VRCPlayerApi player in vrcPlayers)
         {
-            System.DateTime offsetDateTime = new System.DateTime(2022, 6, 13, 0, 0, 0, System.DateTimeKind.Utc);
-            return (float)(System.DateTime.UtcNow - offsetDateTime).TotalSeconds;
+            if (player == null) continue;
+            if (objectWithBoxCollider.GetComponent<BoxCollider>().bounds.Contains(player.GetPosition()))
+            {
+                return true;
+            }
         }
-        public static Vector3 ClosestPointOnLine(Vector3 vA, Vector3 vB, Vector3 vPoint)
-        {
-            var vVector1 = vPoint - vA;
-            var vVector2 = (vB - vA).normalized;
+        return false;
+    }
 
-            var d = Vector3.Distance(vA, vB);
-            var t = Vector3.Dot(vVector2, vVector1);
+    public static float GetUnixTimestamp()
+    {
+        System.DateTime offsetDateTime = new System.DateTime(2022, 6, 13, 0, 0, 0, System.DateTimeKind.Utc);
+        return (float)(System.DateTime.UtcNow - offsetDateTime).TotalSeconds;
+    }
+    public static Vector3 ClosestPointOnLine(Vector3 vA, Vector3 vB, Vector3 vPoint)
+    {
+        var vVector1 = vPoint - vA;
+        var vVector2 = (vB - vA).normalized;
 
-            if (t <= 0)
-                return vA;
+        var d = Vector3.Distance(vA, vB);
+        var t = Vector3.Dot(vVector2, vVector1);
 
-            if (t >= d)
-                return vB;
+        if (t <= 0)
+            return vA;
 
-            var vVector3 = vVector2 * t;
+        if (t >= d)
+            return vB;
 
-            var vClosestPoint = vA + vVector3;
+        var vVector3 = vVector2 * t;
 
-            return vClosestPoint;
-        }
+        var vClosestPoint = vA + vVector3;
+
+        return vClosestPoint;
     }
 }
