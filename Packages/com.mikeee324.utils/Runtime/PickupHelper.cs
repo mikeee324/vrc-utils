@@ -7,7 +7,7 @@ using VRC.SDKBase;
 using VRC.Udon;
 using VRC.Udon.Common;
 
-namespace com.mikeee324.utils
+namespace mikeee324.Utils
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     public class PickupHelper : UdonSharpBehaviour

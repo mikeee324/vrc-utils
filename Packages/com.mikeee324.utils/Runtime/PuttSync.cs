@@ -4,7 +4,7 @@ using UnityEngine;
 using VRC.SDK3.Components;
 using VRC.SDKBase;
 
-namespace com.mikeee324.utils
+namespace mikeee324.Utils
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     public class PuttSync : UdonSharpBehaviour

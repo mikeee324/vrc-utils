@@ -21,7 +21,7 @@ MonoBehaviour:
   compiledVersion: 2
   behaviourSyncMode: 4
   hasInteractEvent: 0
-  scriptID: -5763452342606669598
+  scriptID: 401339135703267048
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
@@ -257,7 +257,7 @@ MonoBehaviour:
       Data: 15|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: com.mikeee324.utils.PickupHelper, com.mikeee324.utils
+      Data: mikeee324.Utils.PickupHelper, com.mikeee324.utils
     - Name: 
       Entry: 8
       Data: 

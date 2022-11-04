@@ -5,7 +5,7 @@ using VRC.SDK3.Components;
 using VRC.SDKBase;
 using VRC.Udon;
 
-namespace com.mikeee324.utils
+namespace mikeee324.Utils
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual), RequireComponent(typeof(PickupHelper))]
     public class BodyMountedObject : UdonSharpBehaviour

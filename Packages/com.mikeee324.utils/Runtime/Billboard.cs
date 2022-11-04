@@ -3,7 +3,7 @@ using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
 
-namespace com.mikeee324.utils
+namespace mikeee324.Utils
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class Billboard : UdonSharpBehaviour

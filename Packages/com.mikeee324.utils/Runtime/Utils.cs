@@ -4,7 +4,7 @@ using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
 
-namespace com.mikeee324
+namespace mikeee324.Utils
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class Utils : UdonSharpBehaviour
