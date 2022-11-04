@@ -4,10 +4,10 @@ on:
   workflow_dispatch:
   push:
     branches: main
-    paths: Packages/com.mikeee324.vrc-utils/**
+    paths: Packages/com.mikeee324.utils/**
 
 env:
-  packageName: "com.mikeee324.vrc-utils"
+  packageName: "com.mikeee324.utils"
 
 jobs:
   build:
