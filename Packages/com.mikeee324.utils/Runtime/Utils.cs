@@ -9,6 +9,7 @@ namespace com.mikeee324
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class Utils : UdonSharpBehaviour
     {
+
         public static void Log(string tag, string message, string tagColor = "green")
         {
             Debug.Log($"[<color={tagColor}>{tag}</color>] {message}");
@@ -31,6 +32,7 @@ namespace com.mikeee324
                 Debug.LogError("Log context is missing!");
                 return;
             }
+
             Debug.Log($"[{context.gameObject.name} (<color={tagColor}>{context.GetUdonTypeName()}</color>)] {message}");
         }
 
@@ -41,6 +43,7 @@ namespace com.mikeee324
                 Debug.LogError("Log context is missing!");
                 return;
             }
+
             Debug.LogWarning($"[{context.gameObject.name} (<color={tagColor}>{context.GetUdonTypeName()}</color>)] {message}");
         }
         public static void LogError(UdonSharpBehaviour context, string message, string tagColor = "green")
@@ -50,6 +53,7 @@ namespace com.mikeee324
                 Debug.LogError("Log context is missing!");
                 return;
             }
+
             Debug.LogError($"[{context.gameObject.name} (<color={tagColor}>{context.GetUdonTypeName()}</color>)] {message}");
         }
 
