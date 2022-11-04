@@ -1,7 +1,7 @@
 {
   "name": "com.mikeee324.utils",
   "displayName": "Mikes VRC Utils",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Stuff",
   "gitDependencies": {},
   "vpmDependencies": {
