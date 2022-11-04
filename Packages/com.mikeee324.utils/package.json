@@ -1,0 +1,13 @@
+{
+  "name": "com.mikeee324.utils",
+  "displayName": "Mikes VRC Utils",
+  "version": "0.0.2",
+  "description": "Stuff",
+  "gitDependencies": {},
+  "vpmDependencies": {
+    "com.vrchat.udonsharp": "1.1.4"
+  },
+  "legacyFolders": {},
+  "legacyFiles": {},
+  "localPath": "D:\\Users\\Mike\\Desktop\\Unity\\vrc-utils\\Packages\\com.mikeee324.utils"
+}

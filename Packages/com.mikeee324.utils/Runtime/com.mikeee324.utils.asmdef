@@ -1,0 +1,41 @@
+{
+    "name": "com.mikeee324.utils",
+    "references": [
+        "VRC.SDK3",
+        "VRC.SDKBase",
+        "VRC.Udon",
+        "VRC.Udon.Editor",
+        "VRC.Udon.Serialization.OdinSerializer",
+        "UdonSharp.Lib",
+        "UdonSharp.Editor",
+        "UdonSharp.Runtime",
+        "Unity.TextMeshPro"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [
+        "VRCSDKBase.dll",
+        "VRCSDK3.dll",
+        "VRC.Udon.Common.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "VRC_SDK_VRCSDK3",
+        "UDON"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.vrchat.worlds",
+            "expression": "3.1.9",
+            "define": "VRCSDK_WORLDS_3_1_9_OR_NEWER"
+        },
+        {
+            "name": "com.vrchat.vrcsdk3",
+            "expression": "2020.3.2",
+            "define": "VRCSDK3_2020_3_2_OR_NEWER"
+        }
+    ],
+    "noEngineReferences": false
+}
