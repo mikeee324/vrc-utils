@@ -5,7 +5,7 @@ using VRC.SDK3.Components;
 using VRC.SDKBase;
 using VRC.Udon;
 
-[UdonBehaviourSyncMode(BehaviourSyncMode.Manual), RequireComponent(typeof(PickupHelper))]
+[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 public class BodyMountedObject : UdonSharpBehaviour
 {
     #region Public Settings
